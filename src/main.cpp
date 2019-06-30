@@ -17,8 +17,6 @@
 void helloWorld();
 void callback(char *topic, byte *payload, unsigned int length);
 
-ADC_MODE(ADC_VCC);
-
 GxEPD2_BW<GxEPD2_290, GxEPD2_290::HEIGHT> display(GxEPD2_290(/*CS=D8*/ SS, /*DC=D3*/ 0, /*RST=D4*/ 2, /*BUSY=D2*/ 4));
 
 const char *mqtt_server = "192.168.178.41";
@@ -196,10 +194,6 @@ void setup()
     client.subscribe(inTopic4Name);
     client.subscribe(inTopic4Value);
   }
-
-  DEBUG_LOG("\ngetVcc: ");
-  DEBUG_LOG(ESP.getVcc());
-  DEBUG_LOG("mV\n");
 
   delay(100);
   display.init(115200);
