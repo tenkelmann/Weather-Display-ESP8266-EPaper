@@ -21,11 +21,7 @@ ADC_MODE(ADC_VCC);
 
 GxEPD2_BW<GxEPD2_290, GxEPD2_290::HEIGHT> display(GxEPD2_290(/*CS=D8*/ SS, /*DC=D3*/ 0, /*RST=D4*/ 2, /*BUSY=D2*/ 4));
 
-//const char *WIFI_SSID = "FingerWeg_nomap";
-//const char *WIFI_PASS = "9430080574628949";
 const char *mqtt_server = "192.168.178.41";
-const char *mqtt_user = "iobroker";
-const char *mqtt_pass = "iobroker";
 const char *clientID = "NodeMCUEPaper";
 const char *inTopic1Name = "NodeMCUEPaper/1/Name";
 const char *inTopic1Value = "NodeMCUEPaper/1/Value";
@@ -159,7 +155,7 @@ void reconnect()
   {
     DEBUG_LOG("\nAttempting MQTT connection...");
     // Attempt to connect
-    if (client.connect(clientID, mqtt_user, mqtt_pass))
+    if (client.connect(clientID, MQTT_USER, MQTT_PASS))
     {
       DEBUG_LOG("\nconnected");
       // ... and resubscribe
@@ -189,7 +185,7 @@ void setup()
   setup_wifi();
   client.setServer(mqtt_server, 1883);
   client.setCallback(callback);
-  if (client.connect(clientID, mqtt_user, mqtt_pass))
+  if (client.connect(clientID, MQTT_USER, MQTT_PASS))
   {
     client.subscribe(inTopic1Name);
     client.subscribe(inTopic1Value);
